@@ -17,6 +17,7 @@ workflows:
           - path: ./_tmp
           - is_create_path: true
       - path::./:
+          run_if: true
           inputs:
           - ipa_path: "${IPA_PATH}"
           - api_token: "${API_TOKEN}"
