@@ -30,7 +30,7 @@ inputs:
       summary: ""
       description: ""
       is_required: true
-  - api_token: ""
+  - api_token: "$APPLIVERY_API_TOKEN"
     opts:
       title: "Account API Key"
       summary: ""
@@ -43,7 +43,7 @@ inputs:
         click on Developers menu option from the left side menu and copy it from the
         Account API Key section.
       is_required: true
-  - app_id: ""
+  - app_id: "$APPLIVERY_APP_ID"
     opts:
       title: "Applivery: App ID"
       summary: ""
