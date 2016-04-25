@@ -1,11 +1,6 @@
 #!/bin/bash
 
 echo "=> Starting Applivery iOS Deploy"
-echo "VAR api_token: ${api_token}"
-echo "VAR API_TOKEN: ${API_TOKEN}"
-echo "VAR APPLIVERY_API_TOKEN: ${APPLIVERY_API_TOKEN}"
-echo "VAR app_id: ${app_id}"
-echo "VAR APP_ID: ${APP_ID}"
 
 THIS_SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -64,6 +59,7 @@ echo "* version_name: ${version_name}"
 echo "* notes: ${notes}"
 echo "* notify: ${notify}"
 echo "* os: ${os}"
+echo "* deployer: ${deployer}"
 echo "* tags: ${tags}"
 echo "* ipa_path: ${ipa_path}"
 echo "***** Other variables *****"
