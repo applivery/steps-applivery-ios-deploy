@@ -22,25 +22,34 @@ if [ ! -f "${ipa_path}" ] ; then
 fi
 
 # APPLIVERY API TOKEN
-if [ -z "${APPLIVERY_API_TOKEN}" ] ; then
+if [ -z "${api_token}" ] ; then
   echo "# Error"
-  echo '* No App APPLIVERY_API_TOKEN provided as environment variable. Terminating...'
+  echo '* No APPLIVERY_API_TOKEN provided as environment variable. Terminating...'
   echoStatusFailed
   exit 1
 fi
 
 # APPLIVER APP ID
-if [ -z "${APPLIVERY_APP_ID}" ] ; then
+if [ -z "${app_id}" ] ; then
   echo "# Error"
-  echo '* No App APPLIVERY_APP_ID provided as environment variable. Terminating...'
+  echo '* No APPLIVERY_APP_ID provided as environment variable. Terminating...'
   echoStatusFailed
   exit 1
 fi
 
 ############# DEFINITIONS ##############
 
-api_token="${APPLIVERY_API_TOKEN}"
-app_id="${APPLIVERY_APP_ID}"
+bitrise_build_number="${BITRISE_BUILD_NUMBER}"
+git_repository_url="${GIT_REPOSITORY_URL}"
+bitrise_app_url="${BITRISE_APP_URL}"
+bitrise_build_url="${BITRISE_BUILD_URL}"
+bitrise_build_trigger_timestamp="${BITRISE_BUILD_TRIGGER_TIMESTAMP}"
+bitrise_git_branch="${BITRISE_GIT_BRANCH}"
+bitrise_git_tag="${BITRISE_GIT_TAG}"
+bitrise_git_commit="${BITRISE_GIT_COMMIT}"
+bitrise_git_message="${BITRISE_GIT_MESSAGE}"
+bitrise_provision_url="${BITRISE_PROVISION_URL}"
+bitrise_certificate_url="${BITRISE_CERTIFICATE_URL}"
 
 echo
 echo "========== CONFIGS =========="
@@ -52,6 +61,18 @@ echo "* notify: ${notify}"
 echo "* os: ${os}"
 echo "* tags: ${tags}"
 echo "* ipa_path: ${ipa_path}"
+echo "***** Other variables *****"
+echo "* bitrise_build_number: ${bitrise_build_number}"
+echo "* git_repository_url: ${git_repository_url}"
+echo "* bitrise_app_url: ${bitrise_app_url}"
+echo "* bitrise_build_url: ${bitrise_build_url}"
+echo "* bitrise_build_trigger_timestamp: ${bitrise_build_trigger_timestamp}"
+echo "* bitrise_git_branch: ${bitrise_git_branch}"
+echo "* bitrise_git_tag: ${bitrise_git_tag}"
+echo "* bitrise_git_commit: ${bitrise_git_commit}"
+echo "* bitrise_git_message: ${bitrise_git_message}"
+echo "* bitrise_provision_url: ${bitrise_provision_url}"
+echo "* bitrise_certificate_url: ${bitrise_certificate_url}"
 echo
 
 ###########################
@@ -63,8 +84,20 @@ curl_cmd="$curl_cmd -F \"versionName=${version_name}\""
 curl_cmd="$curl_cmd -F \"notes=${notes}\""
 curl_cmd="$curl_cmd -F \"notify=${notify}\""
 curl_cmd="$curl_cmd -F \"os=ios\""
+curl_cmd="$curl_cmd -F \"deployer=bitrise\""
 curl_cmd="$curl_cmd -F \"tags=${tags}\""
 curl_cmd="$curl_cmd -F \"package=@${ipa_path}\""
+curl_cmd="$curl_cmd -F \"bitrise_build_number=${bitrise_build_number}\""
+curl_cmd="$curl_cmd -F \"git_repository_url=${git_repository_url}\""
+curl_cmd="$curl_cmd -F \"bitrise_app_url=${bitrise_app_url}\""
+curl_cmd="$curl_cmd -F \"bitrise_build_url=${bitrise_build_url}\""
+curl_cmd="$curl_cmd -F \"bitrise_build_trigger_timestamp=${bitrise_build_trigger_timestamp}\""
+curl_cmd="$curl_cmd -F \"bitrise_git_branch=${bitrise_git_branch}\""
+curl_cmd="$curl_cmd -F \"bitrise_git_tag=${bitrise_git_tag}\""
+curl_cmd="$curl_cmd -F \"bitrise_git_commit=${bitrise_git_commit}\""
+curl_cmd="$curl_cmd -F \"bitrise_git_message=${bitrise_git_message}\""
+curl_cmd="$curl_cmd -F \"bitrise_provision_url=${bitrise_provision_url}\""
+curl_cmd="$curl_cmd -F \"bitrise_certificate_url=${bitrise_certificate_url}\""
 curl_cmd="$curl_cmd https://dashboard.applivery.com/api/builds"
 
 echo
