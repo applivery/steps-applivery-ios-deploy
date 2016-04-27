@@ -73,8 +73,6 @@ echo "* bitrise_git_commit: ${bitrise_git_commit}"
 echo "* bitrise_git_message: ${bitrise_git_message}"
 echo "* bitrise_provision_url: ${bitrise_provision_url}"
 echo "* bitrise_certificate_url: ${bitrise_certificate_url}"
-echo "***** BITRISE XCODE TEST *****"
-echo "* BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH: ${BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH}"
 echo
 
 ###########################
@@ -100,10 +98,6 @@ curl_cmd="$curl_cmd -F \"bitrise_git_commit=${bitrise_git_commit}\""
 curl_cmd="$curl_cmd -F \"bitrise_git_message=${bitrise_git_message}\""
 curl_cmd="$curl_cmd -F \"bitrise_provision_url=${bitrise_provision_url}\""
 curl_cmd="$curl_cmd -F \"bitrise_certificate_url=${bitrise_certificate_url}\""
-# BITRISE TESTS
-if [ ! -f "${BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH}" ] ; then
-  curl_cmd="$curl_cmd -F \"bitrise_xcode_raw_test_result_text_path=${BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH}\""
-fi
 curl_cmd="$curl_cmd https://dashboard.applivery.com/api/builds"
 
 echo
