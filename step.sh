@@ -24,7 +24,7 @@ fi
 # APPLIVERY API TOKEN
 if [ -z "${api_token}" ] ; then
   echo "# Error"
-  echo '* No API_TOKEN provided as environment variable. Terminating...'
+  echo '* No APPLIVERY_API_TOKEN provided as environment variable. Terminating...'
   echoStatusFailed
   exit 1
 fi
@@ -32,7 +32,7 @@ fi
 # APPLIVER APP ID
 if [ -z "${app_id}" ] ; then
   echo "# Error"
-  echo '* No APP_ID provided as environment variable. Terminating...'
+  echo '* No APPLIVERY_APP_ID provided as environment variable. Terminating...'
   echoStatusFailed
   exit 1
 fi
