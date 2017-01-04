@@ -58,7 +58,7 @@ inputs:
       is_required: false
   - notes: "Deployed with Bitrise Applivery.com iOS Deploy Step."
     opts:
-      title: "Notes attached to the deploy"
+      title: "Release notes"
       summary: ""
       description: "Additional build/release notes"
   - notify: "true"
@@ -68,11 +68,18 @@ inputs:
       description: "This flag allows you to automatically notify your testers vía email."
       value_options: ["true", "false"]
       is_required: true
+  - autoremove: "true"
+    opts:
+      title: "(Optional) Automatically remove the oldest build?"
+      summary: ""
+      description: "Automatically remove the oldest build before uploading a new one to prevent reaching your account limits."
+      value_options: ["true", "false"]
+      is_required: false
   - tags: ""
     opts:
       title: "(Optional) Comma-separated list of tags"
       summary: ""
-      description: "Comma-separated list of tags"
+      description: "Comma-separated list of tags to easily identify the build"
       is_required: false
   - version_name: ""
     opts:
