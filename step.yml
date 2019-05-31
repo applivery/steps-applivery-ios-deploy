@@ -1,87 +1,78 @@
-title: "Applivery.com iOS Deploy"
-summary: Deploy your awesome iOS Application to Applivery.com
+title: "Applivery.com v3 iOS Deploy"
+summary: Deploy your awesome iOS App to Applivery.com
 description: |-
   Deploy an iOS application to [Applivery](http://www.applivery.com),
-  add notes and notify testers.
+  add notes and notify Collaborators and Employees.
 
   Register a Applivery account at [http://www.applivery..com/](http://www.applivery.com)
   and create an App to utilize this step.
 
-  You also need to get your *Account API Key* for you account and the *App Id* for the app.
+  You also need to get your *App Token* of your App that can be found under your App Settings.
 website: https://github.com/applivery/steps-applivery-ios-deploy
 source_code_url: https://github.com/applivery/steps-applivery-ios-deploy
 support_url: https://github.com/applivery/steps-applivery-ios-deploy/issues
 host_os_tags:
+  - ubuntu
   - osx-10.10
 project_type_tags:
   - ios
 type_tags:
   - deploy
   - Applivery
-  - iOS
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
 run_if: ".IsCI"
 inputs:
-  - ipa_path: "$BITRISE_IPA_PATH"
+  - IPA_path: "$BITRISE_IPA_PATH"
     opts:
       title: "IPA file path"
       summary: ""
       description: ""
       is_required: true
-  - api_token: "$APPLIVERY_API_TOKEN"
+  - appToken: "$APPLIVERY_APP_TOKEN"
     opts:
-      title: "Account API Key"
+      title: "App Token"
       summary: ""
       description: |-
-        This is the API Key to access your account.
+        This is your App Token
 
         ## Where to get the Applivery Account API Key?
 
-        Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
-        click on Developers menu option from the left side menu and copy it from the
-        Account API Key section.
+        Sign in to your [Applivery](http://dashboard.applivery.io) account,
+        click on your App and the navigate to the Settings menu option. Scroll down to the Integrations section and click on New Token button to generate a new token. Then, copy & paste it here. [Read more](https://www.applivery.com/docs/rest-api/authentication/)
       is_required: true
-  - app_id: "$APPLIVERY_APP_ID"
+  - changelog: ""
     opts:
-      title: "Applivery: App ID"
+      title: "(Optional) Changelog or release notes"
       summary: ""
-      description: |-
-        This is the App Id that identifies your App in Applivery.com
-
-        ## Where to get the App Id?
-
-        Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
-        click on Applications menu option from the left side menu, click on the desired App.
-        You'll find the App Id inside the (i) information block (written in red).
-      is_required: false
-  - notes: "Deployed with Bitrise Applivery.com iOS Deploy Step."
+      description: "Additional build/release notes or changelog attached to the deploy"
+  - notifyCollaborators: "true"
     opts:
-      title: "Release notes"
+      title: "Notify Collaborators?"
       summary: ""
-      description: "Additional build/release notes"
-  - notify: "true"
-    opts:
-      title: "Notify Testers?"
-      summary: ""
-      description: "This flag allows you to automatically notify your testers vía email."
+      description: "This flag allows you to automatically notify your project Collaborators vía email."
       value_options: ["true", "false"]
       is_required: true
-  - autoremove: "true"
+  - notifyEmployees: "true"
     opts:
-      title: "(Optional) Automatically remove the oldest build?"
+      title: "Notify Employees?"
       summary: ""
-      description: "Automatically remove the oldest build before uploading a new one to prevent reaching your account limits."
+      description: "This flag allows you to automatically notify your project Employees vía email."
       value_options: ["true", "false"]
-      is_required: false
+      is_required: true
+  - notifyMessage: ""
+    opts:
+      title: "(Optional) Notification message"
+      summary: ""
+      description: "Notification message to be sent along with the email notification"
   - tags: ""
     opts:
       title: "(Optional) Comma-separated list of tags"
       summary: ""
       description: "Comma-separated list of tags to easily identify the build"
       is_required: false
-  - version_name: ""
+  - versionName: ""
     opts:
       title: "(Optional) Human readable version name"
       summary: ""

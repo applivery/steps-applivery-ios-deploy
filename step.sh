@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "=> Starting Applivery iOS Deploy"
+echo "=> Starting Applivery v3 iOS Deploy"
 
 THIS_SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -22,17 +22,9 @@ if [ ! -f "${ipa_path}" ] ; then
 fi
 
 # APPLIVERY API TOKEN
-if [ -z "${api_token}" ] ; then
+if [ -z "${appToken}" ] ; then
   echo "# Error"
-  echo '* No APPLIVERY_API_TOKEN provided as environment variable. Terminating...'
-  echoStatusFailed
-  exit 1
-fi
-
-# APPLIVER APP ID
-if [ -z "${app_id}" ] ; then
-  echo "# Error"
-  echo '* No APPLIVERY_APP_ID provided as environment variable. Terminating...'
+  echo '* No App Token provided as environment variable. Terminating...'
   echoStatusFailed
   exit 1
 fi
@@ -48,58 +40,56 @@ bitrise_git_branch="${BITRISE_GIT_BRANCH}"
 bitrise_git_tag="${BITRISE_GIT_TAG}"
 bitrise_git_commit="${BITRISE_GIT_COMMIT}"
 bitrise_git_message="${BITRISE_GIT_MESSAGE}"
-bitrise_provision_url="${BITRISE_PROVISION_URL}"
-bitrise_certificate_url="${BITRISE_CERTIFICATE_URL}"
 
 echo
-echo "========== CONFIGS =========="
-echo "* api_token: ********"
-echo "* app_id: ${app_id}"
-echo "* version_name: ${version_name}"
-echo "* notes: ${notes}"
-echo "* notify: ${notify}"
-echo "* autoremove: ${autoremove}"
-echo "* os: ${os}"
+echo "========== CONFIGURATION =========="
+echo "* appToken: *****************"
+echo "* app_id: deprecated"
+echo "* version_name: ${versionName}"
+echo "* changelog: ${changelog}"
+echo "* notifyCollaborators: ${notifyCollaborators}"
+echo "* notifyEmployees: ${notifyEmployees}"
+echo "* notifyMessage: ${notifyMessage}"
+echo "* autoremove: deprecated"
+echo "* os: deprecated"
 echo "* tags: ${tags}"
 echo "* ipa_path: ${ipa_path}"
-echo "***** Other variables *****"
-echo "* bitrise_build_number: ${bitrise_build_number}"
-echo "* git_repository_url: ${git_repository_url}"
-echo "* bitrise_app_url: ${bitrise_app_url}"
-echo "* bitrise_build_url: ${bitrise_build_url}"
-echo "* bitrise_build_trigger_timestamp: ${bitrise_build_trigger_timestamp}"
-echo "* bitrise_git_branch: ${bitrise_git_branch}"
-echo "* bitrise_git_tag: ${bitrise_git_tag}"
-echo "* bitrise_git_commit: ${bitrise_git_commit}"
-echo "* bitrise_git_message: ${bitrise_git_message}"
-echo "* bitrise_provision_url: ${bitrise_provision_url}"
-echo "* bitrise_certificate_url: ${bitrise_certificate_url}"
+echo
+echo "========== DEPLOYMENT VALUES =========="
+echo "* commitMessage: ${commitMessage}"
+echo "* commit: ${commit}"
+echo "* branch: ${branch}"
+echo "* tag: ${tag}"
+echo "* triggerTimestamp: ${triggerTimestamp}"
+echo "* buildUrl: ${buildUrl}"
+echo "* ciUrl: ${ciUrl}"
+echo "* repositoryUrl: ${repositoryUrl}"
+echo "* buildNumber: ${buildNumber}"
+
+
 echo
 
 ###########################
 
 curl_cmd="curl --fail"
-curl_cmd="$curl_cmd -H \"Authorization: ${api_token}\""
-curl_cmd="$curl_cmd -F \"app=${app_id}\""
-curl_cmd="$curl_cmd -F \"versionName=${version_name}\""
-curl_cmd="$curl_cmd -F \"notes=${notes}\""
-curl_cmd="$curl_cmd -F \"notify=${notify}\""
-curl_cmd="$curl_cmd -F \"autoremove=${autoremove}\""
-curl_cmd="$curl_cmd -F \"os=ios\""
-curl_cmd="$curl_cmd -F \"deployer=bitrise\""
+curl_cmd="$curl_cmd -H \"Authorization: bearer ${appToken}\""
+curl_cmd="$curl_cmd -F \"versionName=${versionName}\""
+curl_cmd="$curl_cmd -F \"changelog=${changelog}\""
+curl_cmd="$curl_cmd -F \"notifyCollaborators=${notifyCollaborators}\""
+curl_cmd="$curl_cmd -F \"notifyEmployees=${notifyEmployees}\""
+curl_cmd="$curl_cmd -F \"os=android\""
 curl_cmd="$curl_cmd -F \"tags=${tags}\""
-curl_cmd="$curl_cmd -F \"package=@${ipa_path}\""
-curl_cmd="$curl_cmd -F \"bitrise_build_number=${bitrise_build_number}\""
-curl_cmd="$curl_cmd -F \"git_repository_url=${git_repository_url}\""
-curl_cmd="$curl_cmd -F \"bitrise_app_url=${bitrise_app_url}\""
-curl_cmd="$curl_cmd -F \"bitrise_build_url=${bitrise_build_url}\""
-curl_cmd="$curl_cmd -F \"bitrise_build_trigger_timestamp=${bitrise_build_trigger_timestamp}\""
-curl_cmd="$curl_cmd -F \"bitrise_git_branch=${bitrise_git_branch}\""
-curl_cmd="$curl_cmd -F \"bitrise_git_tag=${bitrise_git_tag}\""
-curl_cmd="$curl_cmd -F \"bitrise_git_commit=${bitrise_git_commit}\""
-curl_cmd="$curl_cmd -F \"bitrise_git_message=${bitrise_git_message}\""
-curl_cmd="$curl_cmd -F \"bitrise_provision_url=${bitrise_provision_url}\""
-curl_cmd="$curl_cmd -F \"bitrise_certificate_url=${bitrise_certificate_url}\""
+curl_cmd="$curl_cmd -F \"build=@${ipa_path}\""
+curl_cmd="$curl_cmd -F \"deployer=bitrise\""
+curl_cmd="$curl_cmd -F \"commitMessage=${commitMessage}\""
+curl_cmd="$curl_cmd -F \"commit=${commit}\""
+curl_cmd="$curl_cmd -F \"branch=${branch}\""
+curl_cmd="$curl_cmd -F \"tag=${tag}\""
+curl_cmd="$curl_cmd -F \"triggerTimestamp=${triggerTimestamp}\""
+curl_cmd="$curl_cmd -F \"buildUrl=${buildUrl}\""
+curl_cmd="$curl_cmd -F \"ciUrl=${ciUrl}\""
+curl_cmd="$curl_cmd -F \"repositoryUrl=${repositoryUrl}\""
+curl_cmd="$curl_cmd -F \"buildNumber=${buildNumber}\""
 curl_cmd="$curl_cmd https://dashboard.applivery.com/api/builds"
 
 echo
