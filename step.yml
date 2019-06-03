@@ -18,7 +18,6 @@ project_type_tags:
   - ios
 type_tags:
   - deploy
-  - Applivery
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
