@@ -31,15 +31,17 @@ fi
 
 ############# DEFINITIONS ##############
 
-bitrise_build_number="${BITRISE_BUILD_NUMBER}"
-git_repository_url="${GIT_REPOSITORY_URL}"
-bitrise_app_url="${BITRISE_APP_URL}"
-bitrise_build_url="${BITRISE_BUILD_URL}"
-bitrise_build_trigger_timestamp="${BITRISE_BUILD_TRIGGER_TIMESTAMP}"
-bitrise_git_branch="${BITRISE_GIT_BRANCH}"
-bitrise_git_tag="${BITRISE_GIT_TAG}"
-bitrise_git_commit="${BITRISE_GIT_COMMIT}"
-bitrise_git_message="${BITRISE_GIT_MESSAGE}"
+buildNumber="${BITRISE_BUILD_NUMBER}"
+repositoryUrl="${GIT_REPOSITORY_URL}"
+ciUrl="${BITRISE_APP_URL}"
+buildUrl="${BITRISE_BUILD_URL}"
+triggerTimestamp="${BITRISE_BUILD_TRIGGER_TIMESTAMP}"
+branch="${BITRISE_GIT_BRANCH}"
+tag="${BITRISE_GIT_TAG}"
+commit="${BITRISE_GIT_COMMIT}"
+commitMessage="${BITRISE_GIT_MESSAGE}"
+provisionUrl="${BITRISE_PROVISION_URL}"
+certificateUrl="${BITRISE_CERTIFICATE_URL}"
 
 echo
 echo "========== CONFIGURATION =========="
@@ -65,6 +67,8 @@ echo "* buildUrl: ${buildUrl}"
 echo "* ciUrl: ${ciUrl}"
 echo "* repositoryUrl: ${repositoryUrl}"
 echo "* buildNumber: ${buildNumber}"
+echo "* provisionUrl: ${provisionUrl}"
+echo "* certificateUrl: ${certificateUrl}"
 
 
 echo
@@ -89,6 +93,8 @@ curl_cmd="$curl_cmd -F \"deployer.info.buildUrl=${buildUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.ciUrl=${ciUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.repositoryUrl=${repositoryUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.buildNumber=${buildNumber}\""
+curl_cmd="$curl_cmd -F \"deployer.info.provisionUrl=${provisionUrl}\""
+curl_cmd="$curl_cmd -F \"deployer.info.certificateUrl=${certificateUrl}\""
 curl_cmd="$curl_cmd https://api.applivery.io/v1/integrations/builds"
 
 echo
