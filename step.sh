@@ -73,8 +73,8 @@ echo "* provisionUrl: ${provisionUrl}"
 
 echo
 ############# Generate Zip ###############
-zip -r "/tmp/${app_path}" "${app_path}"
-tmpAppPath="tmp/${app_path}"
+zip -r "/tmp/app.zip" "${app_path}"
+tmpAppPath="/tmp/app.zip"
 echo "* tmpAppPath: ${tmpAppPath}"
 
 
