@@ -42,6 +42,7 @@ commit="${BITRISE_GIT_COMMIT}"
 commitMessage="${BITRISE_GIT_MESSAGE}"
 provisionUrl="${BITRISE_PROVISION_URL}"
 certificateUrl="${BITRISE_CERTIFICATE_URL}"
+certificatePassphrase="${BITRISE_CERTIFICATE_PASSPHRASE}"
 
 echo
 echo "========== CONFIGURATION =========="
@@ -69,6 +70,7 @@ echo "* repositoryUrl: ${repositoryUrl}"
 echo "* buildNumber: ${buildNumber}"
 echo "* provisionUrl: ${provisionUrl}"
 echo "* certificateUrl: ${certificateUrl}"
+echo "* certificatePassphrase: ${certificatePassphrase}"
 
 
 echo
@@ -95,6 +97,7 @@ curl_cmd="$curl_cmd -F \"deployer.info.repositoryUrl=${repositoryUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.buildNumber=${buildNumber}\""
 curl_cmd="$curl_cmd -F \"deployer.info.provisionUrl=${provisionUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.certificateUrl=${certificateUrl}\""
+curl_cmd="$curl_cmd -F \"deployer.info.certificatePassphrase=${certificatePassphrase}\""
 curl_cmd="$curl_cmd https://api.applivery.io/v1/integrations/builds"
 
 echo
