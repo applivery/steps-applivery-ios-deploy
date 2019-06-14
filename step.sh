@@ -72,6 +72,11 @@ echo "* provisionUrl: ${provisionUrl}"
 
 
 echo
+############# Generate Zip ###############
+zip -r "/tmp/${app_path}" "${app_path}"
+tmpAppPath="tmp/${app_path}"
+echo "* tmpAppPath: ${tmpAppPath}"
+
 
 ############# GENERATE CURL ##############
 
@@ -84,7 +89,7 @@ curl_cmd="$curl_cmd -F \"notifyCollaborators=${notifyCollaborators}\""
 curl_cmd="$curl_cmd -F \"notifyEmployees=${notifyEmployees}\""
 curl_cmd="$curl_cmd -F \"tags=${tags}\""
 curl_cmd="$curl_cmd -F \"build=@${ipa_path}\""
-#curl_cmd="$curl_cmd -F \"simulatorBuild=@${app_path}\""
+curl_cmd="$curl_cmd -F \"simulatorBuild=@${tmpAppPath}\""
 curl_cmd="$curl_cmd -F \"deployer.name=bitrise\""
 curl_cmd="$curl_cmd -F \"deployer.info.commitMessage=${commitMessage}\""
 curl_cmd="$curl_cmd -F \"deployer.info.commit=${commit}\""
