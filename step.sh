@@ -41,8 +41,6 @@ tag="${BITRISE_GIT_TAG}"
 commit="${BITRISE_GIT_COMMIT}"
 commitMessage="${BITRISE_GIT_MESSAGE}"
 provisionUrl="${BITRISE_PROVISION_URL}"
-certificateUrl="${BITRISE_CERTIFICATE_URL}"
-certificatePassphrase="${BITRISE_CERTIFICATE_PASSPHRASE}"
 
 echo
 echo "========== CONFIGURATION =========="
@@ -69,14 +67,13 @@ echo "* ciUrl: ${ciUrl}"
 echo "* repositoryUrl: ${repositoryUrl}"
 echo "* buildNumber: ${buildNumber}"
 echo "* provisionUrl: ${provisionUrl}"
-echo "* certificateUrl: ${certificateUrl}"
-echo "* certificatePassphrase: ${certificatePassphrase}"
 
 
 echo
 
-###########################
+############# GENERATE CURL ##############
 
+# Add Cmain params
 curl_cmd="curl --fail"
 curl_cmd="$curl_cmd -H \"Authorization: bearer ${appToken}\""
 curl_cmd="$curl_cmd -F \"versionName=${versionName}\""
@@ -95,9 +92,15 @@ curl_cmd="$curl_cmd -F \"deployer.info.buildUrl=${buildUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.ciUrl=${ciUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.repositoryUrl=${repositoryUrl}\""
 curl_cmd="$curl_cmd -F \"deployer.info.buildNumber=${buildNumber}\""
-curl_cmd="$curl_cmd -F \"deployer.info.provisionUrl=${provisionUrl}\""
-curl_cmd="$curl_cmd -F \"deployer.info.certificateUrl=${certificateUrl}\""
-curl_cmd="$curl_cmd -F \"deployer.info.certificatePassphrase=${certificatePassphrase}\""
+
+# Add Codesigning conditionally
+if [ "${uploadCodeSigning}" = true ] ; then
+  curl_cmd="$curl_cmd -F \"deployer.info.provisionUrl=${provisionUrl}\""
+  curl_cmd="$curl_cmd -F \"deployer.info.certificateUrl=${certificateUrl}\""
+  curl_cmd="$curl_cmd -F \"deployer.info.certificatePassphrase=${certificatePassphrase}\""
+fi
+
+# Add Applivery API URL
 curl_cmd="$curl_cmd https://api.applivery.io/v1/integrations/builds"
 
 echo
