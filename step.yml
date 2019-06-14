@@ -80,8 +80,7 @@ inputs:
     opts:
       title: Enable to upload certificates and provisioning profiles to Applivery.
       summary: Applivery will use these files to help you fix installation issues with your endusers by analyzing those files.
-      description: |
-	If you enable this option the step will download your code signing files from Bitrise Code Signing Tab and it will upload it to Applivery.
+      description: If you enable this option the step will download your code signing files from Bitrise Code Signing Tab and it will upload it to Applivery.
       is_required: true
       value_options:
         - "true"
