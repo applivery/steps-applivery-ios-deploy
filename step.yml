@@ -4,7 +4,7 @@ description: |-
   Deploy an iOS application to [Applivery](http://www.applivery.com),
   add notes and notify Collaborators and Employees.
 
-  Register a Applivery account at [http://www.applivery..com/](http://www.applivery.com)
+  Register a Applivery account at [http://www.applivery.com/](http://www.applivery.com)
   and create an App to utilize this step.
 
   You also need to get your *App Token* of your App that can be found under your App Settings.
@@ -23,7 +23,7 @@ is_always_run: false
 is_skippable: false
 run_if: ".IsCI"
 inputs:
-  - IPA_path: "$BITRISE_IPA_PATH"
+  - ipa_path: "$BITRISE_IPA_PATH"
     opts:
       title: "IPA file path"
       summary: ""
