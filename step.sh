@@ -55,6 +55,7 @@ echo "* notifyMessage: ${notifyMessage}"
 echo "* autoremove: deprecated"
 echo "* os: deprecated"
 echo "* tags: ${tags}"
+echo "* filter: ${filter}"
 echo "* ipa_path: ${ipa_path}"
 echo "* app_path: ${app_path}"
 echo
