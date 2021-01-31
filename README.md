@@ -12,7 +12,6 @@ and call `bitrise run test`.
 added to your `.bitrise.secrets.yml` file!*
 
 ## Step configuration
-* **APPLIVERY_API_TOKEN:** This is the API Key to access your account. Sign in to your [Applivery.com](http://dashboard.applivery.com) account, click on `Developers` menu option from the left side menu and copy it from the `Account API Key` section.
-* **APPLIVERY_APP_ID:** This is the App Id that identifies your App in Applivery.com. Sign in to your [Applivery.com](http://dashboard.applivery.com) account, click on `Applications` menu option from the left side menu, click on the desired App. You'll find the `App Id` inside the (i) information block (written in red).
+* **APPLIVERY_APP_TOKEN:** This is the APP Token to identify and access your App. You can follow [this tutorial](https://www.applivery.com/docs/integrations/bitrise/) to configure your Applivery App token.
 
 *Check [`step.yml`](step.yml) file for more information*

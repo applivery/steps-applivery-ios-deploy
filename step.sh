@@ -88,6 +88,8 @@ curl_cmd="$curl_cmd -F \"changelog=${changelog}\""
 curl_cmd="$curl_cmd -F \"notifyCollaborators=${notifyCollaborators}\""
 curl_cmd="$curl_cmd -F \"notifyEmployees=${notifyEmployees}\""
 curl_cmd="$curl_cmd -F \"tags=${tags}\""
+curl_cmd="$curl_cmd -F \"filter=${filter}\""
+
 curl_cmd="$curl_cmd -F \"build=@${ipa_path}\""
 curl_cmd="$curl_cmd -F \"simulatorBuild=@${tmpAppPath}\""
 curl_cmd="$curl_cmd -F \"deployer.name=bitrise\""

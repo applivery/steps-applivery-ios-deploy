@@ -85,6 +85,12 @@ inputs:
       value_options:
         - "true"
         - "false"
+  - filter: ""
+    opts:
+      title: "(Optional) Comma-separated list of groups that will be notified"
+      summary: ""
+      description: "Comma-separated list of groups that will be notified. i.e.: group1,group2|group3 = (group1 AND group2) OR (group3)"
+      is_required: false
 outputs:
   - APPLIVERY_DEPLOY_STATUS:
     opts:
